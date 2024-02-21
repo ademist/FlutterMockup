@@ -1,27 +1,56 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 class CurvedBackground extends StatelessWidget {
 
   const CurvedBackground({super.key});
 
+  void login () {
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    List gcolors = [];
-    gcolors.add(const Color.fromARGB(0, 74, 79, 152));
-
     return Scaffold(
-      body: ClipPath(
-        clipper: BottomWaveClipper(),
-        child: Container(
-          color: const Color.fromARGB(255, 83, 94, 249),
-          height: 300,
-          child: const Center(
-            child: Image(image: AssetImage('lib/images/logo.png'), width: 100, height: 100,),
-          ),
+      body: Column(
+        children: <Widget>[
+          ClipPath(
+            clipper: BottomWaveClipper(),
+            child: Container(
+              // color: const Color.fromARGB(255, 83, 94, 249),
+              decoration: const BoxDecoration(gradient: LinearGradient(transform: GradientRotation(3.1415926535897932/4), colors: [Color.fromARGB(255, 79, 48, 193),Color.fromARGB(255, 82, 20, 227), Color.fromARGB(255, 66, 140, 225)])),
+              height: 300,
+              child: const Center(
+                child: Center(child: Image(image: AssetImage('lib/images/logo.png'), width: 100, height: 100,),),
+              ),
+            ),
         ),
-      ),
+        const Expanded(
+          child: Column(
+            children: [
+              Text('Flutter App!', style: TextStyle(fontSize: 40, color: Color.fromARGB(255, 83, 94, 249)),),
+              Padding(padding: EdgeInsets.only(top: 30)),
+              Padding(
+                padding: EdgeInsets.only(top: 30, left: 50, right: 50),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Username Or Email',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30, left: 50, right: 50),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+            ],
+          )
+        )
+      ],),
     );
   }
 }
