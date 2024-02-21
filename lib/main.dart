@@ -8,6 +8,11 @@ class CurvedBackground extends StatefulWidget {
 }
 
 class _CurvedBackgroundState extends State<CurvedBackground> {
+
+  final pageControl = PageController(
+    initialPage: 1
+  );
+
   void _handleButtonPress() {
     print('Login button pressed!');
     // setState(() {
@@ -18,8 +23,10 @@ class _CurvedBackgroundState extends State<CurvedBackground> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
+      body: ListView(
+        controller: pageControl,
+        scrollDirection: Axis.vertical,
+        children: [
           ClipPath(
             clipper: BottomWaveClipper(),
             child: Container(
@@ -43,8 +50,7 @@ class _CurvedBackgroundState extends State<CurvedBackground> {
               ),
             ),
           ),
-          Expanded(
-            child: Column(
+          Column(
               children: [
                 const Text(
                   'Flutter App!',
@@ -84,9 +90,8 @@ class _CurvedBackgroundState extends State<CurvedBackground> {
                 ),
               ],
             ),
-          ),
         ],
-      ),
+      )
     );
   }
 }
