@@ -1,11 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class CurvedBackground extends StatefulWidget {
-  const CurvedBackground({Key? key}) : super(key: key);
+  const CurvedBackground({super.key});
 
   @override
   State<CurvedBackground> createState() => _CurvedBackgroundState();
