@@ -1,47 +1,93 @@
-import 'package:blog_post_app/screens/layout/main_layout.dart';
+import 'package:blog_post_app/screens/layouts/main_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/post_provider.dart';
+import 'package:go_router/go_router.dart';
 
-void main() {
-  runApp(const HomeScreen());
-}
-
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final postsAsyncValue = ref.watch(postsFutureProvider);
+
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue.shade400),
-        useMaterial3: true,
+        brightness: Brightness.light,
+        primaryColor: Colors.white,
       ),
-      home: const MyHomePage(title: 'Home Screen'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return MainLayout(widget: widget, body: const Center(
+      home: MainLayout(
+      title: '',
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 35, right: 35),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(child: Text('Home Screen Page'),)
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              // height: 200,
+              child: Align(
+                alignment:Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                  child: Text("Today's Blog", textAlign: TextAlign.end, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))
+                )
+              )
+            ),
+            Card(
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(image: NetworkImage('https://picsum.photos/500/300?random=1'), fit: BoxFit.cover)
+                ),
+                height: 250,
+              ),
+            ),
+            SizedBox(
+              // height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Latest', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  TextButton(onPressed: () {}, child: Text('See All', style: TextStyle(color: Colors.grey.shade400),))
+                ],
+              )
+            ),
+            postsAsyncValue.when(
+              data: (posts) {
+                List<Widget> ?nodeList = [];
+                posts.toList().forEach((post) { 
+                  // ignore: no_leading_underscores_for_local_identifiers
+                  String id = post.id.toString();
+
+                  nodeList.add(
+                    ListTile(
+                      onTap: () {
+                        print(id);
+                        context.go('/home/post/$id');
+                      },
+                      contentPadding: const EdgeInsets.only(left: 0, right: 0, bottom: 10),
+                        leading: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(10)), child: Image(width: 60, height: 60, fit: BoxFit.cover,image: NetworkImage('https://picsum.photos/500/300?random=$id')),),
+                        title: Text(
+                          post.title,
+                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                    )
+                  );
+                 });
+                return Column(
+                    children: nodeList,
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, stack) => Text('Error: $err')
+            )
+            
+            // SizedBox(height: 300, child: )
           ],
-        ),
-      ),);
+        )
+      ),
+    ),
+    );
   }
 }
