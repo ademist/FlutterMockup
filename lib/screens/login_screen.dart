@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // setState(() {
     //   // Update your state here
     // });
-    context.goNamed('home');
+    context.goNamed('screen1');
   }
 
   @override
