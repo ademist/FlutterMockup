@@ -1,4 +1,28 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostDataModel {
-  
-}
+final counterProvider = StateProvider<int>((ref) => 0);
+
+String dummyText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,';
+
+final postProvider = StateProvider<List<Map<dynamic, dynamic>>>((ref) => [
+  {
+    "title": 'Post Title Sample',
+    "discription": dummyText
+  },
+  {
+    "title": 'News updates today',
+    "discription": dummyText
+  },
+  {
+    "title": 'Facebook is now Meta!',
+    "discription": dummyText
+  },
+  {
+    "title": 'Twitter\'s Bought\'s Share',
+    "discription": dummyText
+  },
+  {
+    "title": 'Twitter is now X why did Elon changed that?',
+    "discription": dummyText
+  },
+]);
