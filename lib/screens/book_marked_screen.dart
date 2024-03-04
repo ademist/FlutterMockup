@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/post_provider.dart';
+import '../utils/string_extentions.dart';
 
 class BookmarkedScreen extends ConsumerWidget {
   const BookmarkedScreen({super.key});
@@ -31,7 +32,7 @@ class BookmarkedScreen extends ConsumerWidget {
         contentPadding: const EdgeInsets.only(left: 0, right: 0, bottom: 10),
           leading: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)), child: Image(width: 60, height: 60, fit: BoxFit.cover,image: NetworkImage('https://picsum.photos/500/300?random=${item.id}')),),
           title: Text(
-            item.title!,
+            item.title.capitalize(),
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

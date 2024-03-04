@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/post_provider.dart';
 import 'package:go_router/go_router.dart';
-
+import '../utils/string_extentions.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -36,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
             Card(
               child: Container(
                 decoration: const BoxDecoration(
-                  image: DecorationImage(image: NetworkImage('https://picsum.photos/500/300?random=1'), fit: BoxFit.cover)
+                  image: DecorationImage(image: NetworkImage('https://picsum.photos/id/27/3264/1836'), fit: BoxFit.cover)
                 ),
                 height: 250,
               ),
@@ -67,7 +67,7 @@ class HomeScreen extends ConsumerWidget {
                       contentPadding: const EdgeInsets.only(left: 0, right: 0, bottom: 10),
                         leading: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(10)), child: Image(width: 60, height: 60, fit: BoxFit.cover,image: NetworkImage('https://picsum.photos/500/300?random=$id')),),
                         title: Text(
-                          post.title,
+                          post.title.capitalize(),
                           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
