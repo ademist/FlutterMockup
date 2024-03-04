@@ -52,7 +52,7 @@ import 'package:blog_post_app/providers/post_provider.dart';
 import 'package:blog_post_app/screens/layouts/post_page_layout.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:blog_post_app/models/post.dart';
-import '../utils/string_extentions.dart';
+import '../utils/global_extentions.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
