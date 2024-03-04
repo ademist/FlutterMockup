@@ -35,6 +35,8 @@ dependencies:
   riverpod_annotation: ^2.3.4
   cupertino_icons: ^1.0.6
   http: ^1.2.1
+  iconify_flutter: ^0.0.5
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,7 @@ flutter:
   uses-material-design: true
   assets:
     - lib/images/logo.png
+    - lib/assets/images/icons/logo.svg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
